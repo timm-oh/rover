@@ -1,5 +1,3 @@
 require "rover/version"
-
-module Rover
-  # Your code goes here...
-end
+require "rover/orientation"
+require "rover/position"
