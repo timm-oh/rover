@@ -5,10 +5,19 @@ module Rover
     end
 
     def move_rover(instruction, rover)
-      case instruction
-      when :left  then rover.turn_left
-      when :right then rover.turn_right
-      when :move  then check_valid_rover_movement(rover)
+      if @plateau.valid?
+        case instruction
+        when :left  then rover.turn_left
+        when :right then rover.turn_right
+        when :move  then check_valid_rover_movement(rover)
+        else raise ArgumentError.new("#{instruction} is not a valid instruction")
+        end
+      end
+    end
+    
+    class OutOfBoundsError < StandardError
+      def initialize(rover, new_position)
+        super("Rover: #{rover} cannot move to #{new_position} because it is out of bounds")
       end
     end
 
@@ -24,10 +33,5 @@ module Rover
       end
     end
 
-    class OutOfBoundsError < StandardError
-      def initialize(rover, new_position)
-        super("Rover: #{rover} cannot move to #{new_position} because it is out of bounds")
-      end
-    end
   end
 end
