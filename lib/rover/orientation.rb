@@ -17,6 +17,10 @@ module Rover
       def left
         WEST
       end
+
+      def to_s
+        'N'
+      end
     end
 
     class South < Orientation
@@ -26,6 +30,10 @@ module Rover
 
       def left
         EAST
+      end
+
+      def to_s
+        'S'
       end
     end
 
@@ -37,6 +45,10 @@ module Rover
       def left
         NORTH
       end
+
+      def to_s
+        'E'
+      end
     end
 
     class West < Orientation
@@ -46,6 +58,10 @@ module Rover
 
       def left
         SOUTH
+      end
+
+      def to_s
+        'W'
       end
     end
 
