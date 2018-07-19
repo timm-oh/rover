@@ -19,5 +19,16 @@ module Rover
     def move
       @position.move(@orientation)
     end
+
+    def eql?(rover)
+      return false unless rover.kind_of? Rover
+      self.position.x == rover.position.x &&
+      self.position.y == rover.position.y &&
+      self.orientation == rover.orientation
+    end
+
+    def hash
+      self.position.x.hash ^ self.position.y.hash ^ self.orientation.hash
+    end
   end
 end
