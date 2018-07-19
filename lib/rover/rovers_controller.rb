@@ -6,11 +6,10 @@ module Rover
 
     def move_rover(instruction, rover)
       if @plateau.valid?
-        case instruction
+        case Instruction.from_string(instruction)
         when :left  then rover.turn_left
         when :right then rover.turn_right
         when :move  then check_valid_rover_movement(rover)
-        else raise ArgumentError.new("#{instruction} is not a valid instruction")
         end
       end
     end
@@ -23,6 +22,18 @@ module Rover
 
     private
 
+    class Instruction
+      VALID_INSTRUCTIONS = {
+        'L' => :left,
+        'R' => :right,
+        'M' => :move
+      }
+  
+      def self.from_string(instruction)
+        VALID_INSTRUCTIONS[instruction.upcase] || :none
+      end
+    end
+    
     def check_valid_rover_movement(rover)
       new_position = rover.position.dup
       new_position.move(rover.orientation)

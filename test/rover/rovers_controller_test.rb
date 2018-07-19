@@ -9,17 +9,17 @@ module Rover
     end
 
     def test_left_instruction_turns_rover_left
-      @controller.move_rover(:left, @rover)
+      @controller.move_rover('L', @rover)
       assert_equal Orientation::WEST, @rover.orientation
     end
 
     def test_right_instruction_turns_rover_right
-      @controller.move_rover(:right, @rover)
+      @controller.move_rover('R', @rover)
       assert_equal Orientation::EAST, @rover.orientation
     end
 
     def test_move_instruction_to_a_valid_position
-      @controller.move_rover(:move, @rover)
+      @controller.move_rover('M', @rover)
       assert_equal 1, @rover.position.y
       assert_equal 0, @rover.position.x
     end
@@ -27,7 +27,7 @@ module Rover
     def test_move_instruction_to_a_invalid_position
       @rover = Rover.new(Position.new(5, 5))
       assert_raises RoversController::OutOfBoundsError do
-        @controller.move_rover(:move, @rover)
+        @controller.move_rover('M', @rover)
       end
     end
   end
